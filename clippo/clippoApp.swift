@@ -9,12 +9,23 @@ import SwiftUI
 
 @main
 struct clippoApp: App {
-    let persistenceController = PersistenceController.shared
+    let persistenceController = PersistenceController.shared;
 
     var body: some Scene {
-        WindowGroup {
-            ContentView()
+        WindowGroup(id: "settingsWindow") {
+            SettingsView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
+                .fixedSize()
+        }
+        .windowResizability(.contentSize)
+
+        MenuBarExtra(
+            "Utility App",
+            systemImage: "clipboard"
+        ){
+            StatusMenuView()
         }
     }
 }
+
+
